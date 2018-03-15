@@ -26,3 +26,7 @@ These scripts automate a lot and provide a strong base to continue from, but it 
 PAM has also been configured not to deny after x accounts. This can be changed in pam_configuration.sh
 
 If you want to add/remove kernel parameters as found in main.sh, these can be added directly to the relevant main method - this is another way to edit the script to your demands.
+
+CHANGES YOU MAY WISH TO MAKE:
+
+remove ALL: ALL lines from /etc/hosts.deny
