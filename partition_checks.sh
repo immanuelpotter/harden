@@ -33,7 +33,7 @@ check_properties(){
     fi
     if [[  ]] ; then
       echo "Option ${j} NOT found for ${partition} - fixing:"
-      sed -i 's/'${partition}'/'${partition},'/' /etc/systemd/system/local-fs.target.wants/${partition}.mount
+       sed -i.${BACKUP} 's/'${partition}'/'${partition},'/' /etc/systemd/system/local-fs.target.wants/${partition}.mount
     fi
   done
 }

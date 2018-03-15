@@ -19,7 +19,7 @@ check_kernel_parameter(){
     echo "Kernel parameter ${krn_prm} changed to ${value_to_become}" 
   fi
   if [[ $kernel_param_value != "${krn_prm}=${value_to_become}" ]] ; then
-    sed -i 's/^'${krn_prm}'\s*=\s*[0-9]+/'${krn_prm}'='${value_to_become}'/g' /etc/sysctl.conf
+     sed -i.${BACKUP} 's/^'${krn_prm}'\s*=\s*[0-9]+/'${krn_prm}'='${value_to_become}'/g' /etc/sysctl.conf
     echo "Kernel parameter $krn_prm changed to $value_to_become" 
   fi
 }

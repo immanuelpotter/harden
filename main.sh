@@ -41,13 +41,13 @@
 . further_uid_and_passwd_checks.sh
 
 yum_installations(){
-  yum check-update && yum update && echo "Yum updated"
-  yum install -y ntp && echo "NTP installed"
-  yum install -y chrony && echo "Chrony installed"
-  yum install -y net-tools
-  yum install -y tcp_wrappers
-  yum install -y iptables
-  yum install -y rsyslog
+  yum check-update && yum update -y
+  yum install -y ntp \
+                 chrony \
+                 net-tools \
+                 tcp_wrappers \
+                 iptables \
+                 rsyslog
 }
 
 fs_types_main(){
@@ -325,4 +325,4 @@ main(){
   echo "Please check hardening_report.txt" 
 }
 
-main 2>&1 | tee -a hardening_report.txt
+main 2>&1 | tee -a hardening_report.${BACKUP}.txt

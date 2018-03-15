@@ -11,7 +11,7 @@ grep_check(){
     echo "$string_to_find found in $file_to_check and is as expected" 
   else
     if [[ ${#found_line} -gt 0 ]] ; then
-      sed -i 's/'${string_to_find}'/d' $file_to_check
+       sed -i.${BACKUP} 's/'${string_to_find}'/d' $file_to_check
     else
       echo "${string_to_find} not found, adding" 
       echo $expected >> $file_to_check
