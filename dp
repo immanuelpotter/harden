@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -r 's/(^restrict)(.*)-4/\1 -4 default kod nomodify notrap nopeer noquery/' /etc/ntp.conf
