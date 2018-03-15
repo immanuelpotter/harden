@@ -52,7 +52,8 @@ yum_installations(){
 
 fs_types_main(){
   for fs_type in $fs_list_disable_modprobe ; do
-    ensure_fs ${fs_type}
+    ensure_fs_lsmod ${fs_type}
+    ensure_fs_modprobe ${fs_type}
   done
   echo
 }
@@ -324,4 +325,4 @@ main(){
   echo "Please check hardening_report.txt" 
 }
 
-main | tee -a hardening_report.txt
+main 2>&1 | tee -a hardening_report.txt

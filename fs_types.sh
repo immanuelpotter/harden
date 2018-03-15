@@ -6,7 +6,7 @@
 #
 # Originally this script was just for checking filesystem types were blocked, but has now evolved to block uncommon network protocols too from dccp onwards in below list
 
-ensure_fs(){
+ensure_fs_lsmod(){
   filesystem="$1"
   modprobe_output="$(modprobe -n -v ${filesystem})"
   lsmod_output="$(lsmod | grep ${filesystem})"
@@ -15,8 +15,13 @@ ensure_fs(){
   else
     echo "Module found in kernel for ${filesystem} - consider removing" 
   fi
+}
 
-  if [[ $modprobe_output != 'install /bin/true' ]] ; then
-    echo "install ${filesystem} /bin/true" >> /etc/modprobe.d/CIS.conf
+ensure_fs_modprobe(){
+  filesystem="$1"
+  modprobe_output="$(modprobe -n -v ${filesystem})"
+  modprobe_contains_install_bin_true="$(echo "${modprobe_output}" | awk '/install \/bin\/true/{print $1,$2}')"
+  if [[ "$modprobe_contains_install_bin_true" != "install /bin/true" ]] ; then
+    echo "install ${filesystem} /bin/true" | tee -a /etc/modprobe.d/CIS.conf
   fi
 }
