@@ -3,7 +3,7 @@
 
 superusr_check(){
   superusers="$(grep "^set superusers" /boot/grub2/grub.cfg)"
-  echo -e "GRUB superusers: ${superusers}\nPLEASE CHECK that this list is as you were expecting, and if not, change according to site policy in /boot/grub2/grub.cfg" 
+  echo -e "\nGRUB superusers: ${superusers}\nPLEASE CHECK that this list is as you were expecting, and if not, change according to site policy in /boot/grub2/grub.cfg\n" 
 }
 
 superpass_check(){
