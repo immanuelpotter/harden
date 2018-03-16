@@ -10,7 +10,7 @@ gpg_bool_logic(){
       echo "gpgcheck=1" >> ${file}
       echo "gpgcheck=1 added to $file" 
     else
-      sed -i.${BACKUP} 's/gpgcheck=0/gpgcheck=1/' "${file}"
+      sed -i 's/gpgcheck=0/gpgcheck=1/' "${file}"
       echo "Edited ${file} to contain gpg checking" 
     fi
   fi
