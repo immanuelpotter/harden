@@ -7,13 +7,6 @@
 #
 #. grep_check.sh
 
-PASS_MAX_DAYS=90
-PASS_MIN_DAYS=7
-PASS_WARN_AGE=7
-DISABLE_AFTER_EXPIRATION=30
-
-#users_to_expire="$(ls /home)"
-
 check_max_pw_expiry(){
   grep_check "PASS_MAX_DAYS" /etc/login.defs "PASS_MAX_DAYS ${PASS_MAX_DAYS}"
 }
