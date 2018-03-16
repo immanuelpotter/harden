@@ -23,11 +23,13 @@ The finds.sh won't directly change permissions for you, but will alert you to an
 
 These scripts automate a lot and provide a strong base to continue from, but it must be stressed again that manual changes should be made to grub and variables.env. It is worth reading main.sh to acquaint yourself with what is actually happening, and read the relevant sourced files as you need to.
 
-PAM has also been configured not to deny after x accounts. This can be changed in pam_configuration.sh
+PAM has also been configured not to deny after x attempts. This can be changed in pam_configuration.sh
 
 If you want to add/remove kernel parameters as found in main.sh, these can be added directly to the relevant main method - this is another way to edit the script to your demands.
 
 CHANGES YOU MAY WISH TO MAKE:
+
+This has been scripted as "get_me_back_in.sh" - as a quick executable to run post-harden which adds the vagrant user to "wheel" (as wheel is in the allowed groups in /etc/ssh/sshd_config). It also removes ALL: ALL from /etc/hosts.deny to allow our host back in - this could be done by explicitly allowing hosts which allows greater security.
 
 remove:
 ``` ALL: ALL ```
