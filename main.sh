@@ -288,7 +288,7 @@ further_uid_and_passwd_checks_main(){
 }
 
 main(){
-  date > hardening_report.txt
+  date > hardening_report.${BACKUP}.txt
   yum_installations
   overwrite_issue
   fs_types_main

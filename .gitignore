@@ -1,3 +1,4 @@
 .vagrant
+*.repo
 .*.swp
 hardening_report.txt
