@@ -30,13 +30,13 @@ If you want to add/remove kernel parameters as found in main.sh, these can be ad
 CHANGES YOU MAY WISH TO MAKE:
 
 remove:
-``` ALL: ALL```
+``` ALL: ALL ```
  lines from /etc/hosts.deny OR add hosts to /etc/hosts.allow
 
 Add users you want to be able to SSH in to a group, and put this group in /etc/ssh/sshd_config. Otherwise, post-harden, you won't be able to get back in the box.
 
-	```vi /etc/ssh/sshd_config
+``` vi /etc/ssh/sshd_config
 
-		AllowGroups wheel```
+		AllowGroups wheel
 
-	```usermod -aG wheel <user to ssh in as, "vagrant" if using vagrant>```
+usermod -aG wheel <user to ssh in as, "vagrant" if using vagrant> ```
