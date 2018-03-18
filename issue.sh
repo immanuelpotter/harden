@@ -6,6 +6,6 @@
 #
 
 overwrite_issue(){
-  echo $ISSUE_MESSAGE > /etc/issue
-  echo $ISSUE_MESSAGE > /etc/issue.net
+  echo "$ISSUE_MESSAGE" > /etc/issue
+  echo "$ISSUE_MESSAGE" > /etc/issue.net
 }
