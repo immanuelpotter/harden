@@ -34,5 +34,5 @@ pam_pw_sha512(){
 
 
 pam_su_restriction(){
-  grep_check "auth\s+required\s+pam_wheel.so" /etc/pam.d/su 'auth required pam_wheel.so use_uid'
+  sed -i '6 s/^#//' /etc/pam.d/su
 }
