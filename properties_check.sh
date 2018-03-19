@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Work in progress - commented out for running without
+
 #Properties_tmp applies to /tmp, /var/tmp, /dev/shm
 #Properties_home just applies to /home
 
