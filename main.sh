@@ -15,6 +15,7 @@
 . issue.sh
 . fs_types.sh
 . partition_checks.sh
+. properties_check.sh
 . sticky_bit_check.sh
 . systemctl_disabling.sh
 . ensure_gpg_configured.sh
@@ -59,10 +60,19 @@ fs_types_main(){
 }
 
 partition_checks_main(){
-  for i in partition_check_dirs; do
+  for i in $partition_check_dirs; do
     mount_check ${i}
-    check_properties ${i}
   done
+#  for x in $tmp_dirs_props_check ; do
+#    for more in $properties_tmp ; do
+#      check_properties_tmp "${x}" "${more}"
+#    done
+#  done
+#  for z in $properties_home ; do
+#    for yetmore in ; do
+#      check_properties_home "${z}" "${yetmore}"
+#    done
+#  done
 }
 
 systemctl_disabling_main(){
