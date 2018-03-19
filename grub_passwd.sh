@@ -9,7 +9,7 @@ superusr_check(){
 superpass_check(){
   pass="$(grep "^password" /boot/grub2/grub.cfg)"
   if [[ -z $pass ]] ; then
-    echo "WARNING - doesn't look like a password is set. Check /boot/grub2/grub.cfg" 
+    echo "WARNING - doesn't look like a GRUB password is set. This means an attacker with physical access could interrupt the boot sequence and gain a root shell. Check /boot/grub2/grub.cfg" 
   fi
 }
 

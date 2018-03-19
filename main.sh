@@ -173,10 +173,18 @@ grep_check_main(){
   #postfix
   grep_check "^inet_interfaces" /etc/postfix/main.cf 'inet_interfaces = localhost'
   #rsyslog
-  grep_check "^\$FileCreateMode" /etc/rsyslog.conf '$FileCreateMode 0640'
-  #Comment out these two lines for non-designated log hosts (remove # if is one)
-  grep_check "\$ModLoad imtcp.so" /etc/rsyslog.conf '# $ModLoad imtcp.so'
-  grep_check "\$InputTCPServerRun" /etc/rsyslog.conf '# $InputTCPServerRun 514'
+  
+  #Three files below grep check doesn't work for - commented out to investigate.
+  #Bottom two can stay commented anyway as not trying to create a log host.
+
+  #grep_check "^\$FileCreateMode" /etc/rsyslog.conf '$FileCreateMode 0640'
+  sed -i '/^$FileCreateMode/d' /etc/rsyslog.conf
+  echo -e "\$FileCreateMode 0640" >> /etc/rsyslog.conf
+  
+  # Leave the lines below commented if you DON'T want the box to be a designated log host.
+
+  # grep_check '#$ModLoad imtcp.so' /etc/rsyslog.conf '#$ModLoad imtcp.so'
+  # grep_check '#$InputTCPServerRun' /etc/rsyslog.conf '#$InputTCPServerRun 514'
   
   #sshd
   grep_check "^Protocol" /etc/ssh/sshd_config 'Protocol 2'
