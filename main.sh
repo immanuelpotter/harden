@@ -265,7 +265,7 @@ finds_main(){
 
 legacy_plus_entries_main(){
  for etc_file in group passwd shadow ; do
-   legacy_plus_entries /etc/$(etc_file)
+   legacy_plus_entries /etc/${etc_file}
  done
 }
 
