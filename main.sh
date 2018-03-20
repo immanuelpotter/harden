@@ -63,16 +63,6 @@ partition_checks_main(){
   for i in $partition_check_dirs; do
     mount_check ${i}
   done
-#  for x in $tmp_dirs_props_check ; do
-#    for more in $properties_tmp ; do
-#      check_properties_tmp "${x}" "${more}"
-#    done
-#  done
-#  for z in $properties_home ; do
-#    for yetmore in ; do
-#      check_properties_home "${z}" "${yetmore}"
-#    done
-#  done
 }
 
 systemctl_disabling_main(){
@@ -305,6 +295,19 @@ further_uid_and_passwd_checks_main(){
   ensure_no_duplicate_names /etc/group
 }
 
+properties_check_main(){
+  create_local_fs_dir
+  make_systemd_tmp
+  edit_fstab_tmp "/tmp"
+  edit_fstab_tmp "/var/tmp"
+  edit_fstab_tmp "/dev/shm"
+  edit_fstab_home "/home"
+  remount_home "/home"
+  remount_tmps "/tmp"
+  remount_tmps "/var/tmp"
+  remount_tmps "/dev/shm"
+}
+
 main(){
   date > hardening_report.${BACKUP}.txt
   yum_installations
@@ -328,6 +331,7 @@ main(){
   bring_down_wireless_ifs
   no_crondeny_or_cronallow
   pam_main
+  properties_check_main
   nologin_sysaccounts
   usermod_changes     
   finds_main

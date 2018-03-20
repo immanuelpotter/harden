@@ -2,43 +2,62 @@
 
 #Work in progress - commented out for running without
 
-#Properties_tmp applies to /tmp, /var/tmp, /dev/shm
-#Properties_home just applies to /home
+# 1) Check mounted (mount | grep $filesystem)
+# 2) Edit /etc/fstab with appropiate properties for $filesystem OR systemd for /tmp
+# 3) mount -o remount,properties $filesystem
 
-#TODO: mkdir for /etc/systemd/system/local-fs.target.wants?
+# tmp applies to /tmp, /var/tmp, /dev/shm
+# home just applies to /home
 
-#check_properties_tmp(){
-#  partition="$1"
-#  property_in_question="$2"
-#  option="$(mount | grep $partition | grep ${property_in_question})"
-#  if [[ -z $option ]] ; then
-#      edit_systemd
-#    else
-#      echo "Option ${j} found for ${partition}." 
-#    fi
-#    if [[   ]] ; then
-#      echo "Option ${j} NOT found for ${partition} - fixing:"
-#       sed -i.${BACKUP} 's/'${partition}'/'${partition},'/' /etc/systemd/system/local-fs.target.wants/${partition}.mount
-#    fi
-#  done
-#}
+#Dependency on grep_check.sh
 
-#check_properties_home(){
-#  partition="$1"
-#  property_in_question="$2"
-#  option="$(mount | grep $partition | grep $property_in_question)"
-#}
+create_local_fs_dir(){
+  if [[ ! -d /etc/systemd/system/local-fs.target.wants ]] ; then
+    mkdir /etc/systemd/system/local-fs.target.wants
+    echo "/etc/systemd/system/local-fs.target.wants created"
+  fi
+}
 
-#edit_systemd_tmp(){
-#  echo -e "[Mount]\nOptions=mode=1777,strictatime,noexec,nodev,nosuid" >> /etc/systemd/system/local-fs.target.wants/tmp.mount
-#}
-#
-#edit_fstab_home(){
-#  echo -e "[Mount]\nOptions"
-#}
-#
-#remount(){
-#  partition="$1"
-#  option="$2"
-#  mount -o remount,${option} ${partition}
-#}
+make_systemd_tmp(){
+  if [[ ! -f /etc/systemd/system/local-fs.target.wants/tmp.mount ]] ; then
+    echo '[Mount]' >> /etc/systemd/system/local-fs.target.wants/tmp.mount
+    echo "Options=mode=1777,strictatime,noexec,nodev,nosuid" >> /etc/systemd/system/local-fs.target.wants/tmp.mount
+  else
+    rm -f /etc/systemd/system/local-fs.target.wants/tmp.mount
+    echo '[Mount]' >> /etc/systemd/system/local-fs.target.wants/tmp.mount
+    echo "Options=mode=1777,strictatime,noexec,nodev,nosuid" >> /etc/systemd/system/local-fs.target.wants/tmp.mount
+  fi
+}
+
+edit_fstab_tmp(){
+  partition="$1"
+  mounted="$(mount | grep -w ${partition})"
+  if [[ -n "${mounted}" ]] ; then
+    awk -v partition="${partition}" '$2 == partition {$4="defaults,nosuid,nodev,noexec,x-systemd.device-timeout=0 0 0"}' /etc/fstab 
+  fi
+}
+
+
+edit_fstab_home(){
+  partition="$1"
+  mounted="$(mount | grep -w ${partition})"
+  if [[ -n "${mounted}" ]] ; then
+    awk -v partition="${partition}" '$2 == partition {$4="defaults,nodev,x-systemd.device-timeout=0 0 0"}' /etc/fstab
+  fi
+}
+
+remount_home(){
+  partition="$1"
+  mounted="$(mount | grep -w ${partition})"
+  if [[ -n "${mounted}" ]] ; then
+    mount -o remount,nodev ${partition} 
+  fi
+}
+
+remount_tmps(){
+  partition="$1"
+  mounted="$(mount | grep -w ${partition})"
+  if [[ -n "${mounted}" ]] ; then
+    mount -o remount,nodev,nosuid,noexec ${partition}
+  fi
+}
