@@ -31,18 +31,20 @@ make_systemd_tmp(){
 
 edit_fstab_tmp(){
   partition="$1"
+  changed="defaults,nosuid,nodev,noexec,x-systemd.device-timeout=0"
   mounted="$(mount | grep -w ${partition})"
   if [[ -n "${mounted}" ]] ; then
-    awk -v partition="${partition}" '$2 == partition {$4="defaults,nosuid,nodev,noexec,x-systemd.device-timeout=0 0 0"}' /etc/fstab 
+    awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab 
   fi
 }
 
 
 edit_fstab_home(){
   partition="$1"
+  changed="defaults,nodev,x-systemd.device-timeout=0"
   mounted="$(mount | grep -w ${partition})"
   if [[ -n "${mounted}" ]] ; then
-    awk -v partition="${partition}" '$2 == partition {$4="defaults,nodev,x-systemd.device-timeout=0 0 0"}' /etc/fstab
+    awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab
   fi
 }
 
