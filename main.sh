@@ -93,7 +93,7 @@ single_user_auth_main(){
 yum_removals(){
   yum_removals="xorg-x11* rpbind rsh talk telnet openldap-clients"
   for yumrmv in $yum_removals ; do
-    yum remove $yumrmv
+    yum remove $yumrmv -y
   done
 }
 
