@@ -33,6 +33,7 @@ edit_fstab_tmp(){
   partition="$1"
   changed="defaults,nosuid,nodev,noexec,x-systemd.device-timeout=0"
   mounted="$(mount | grep -w ${partition})"
+  # This check should suffice to change /etc/fstab only if partition is mounted, as root is needed to mount partitions anyway
   if [[ -n "${mounted}" ]] ; then
     awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab 
   fi
@@ -43,6 +44,7 @@ edit_fstab_home(){
   partition="$1"
   changed="defaults,nodev,x-systemd.device-timeout=0"
   mounted="$(mount | grep -w ${partition})"
+  # This check should suffice to change /etc/fstab only if partition is mounted, as root is needed to mount partitions anyway
   if [[ -n "${mounted}" ]] ; then
     awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab
   fi
