@@ -35,7 +35,8 @@ edit_fstab_tmp(){
   mounted="$(mount | grep -w ${partition})"
   # This check should suffice to change /etc/fstab only if partition is mounted, as root is needed to mount partitions anyway
   if [[ -n "${mounted}" ]] ; then
-    awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab 
+    #awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab 
+    sed -r '/\/'${partition}'/!s/(.*) (\/'${partition}') (.*) (.*) (.*) (.*)/\1 \2 \3 '${changed}' \5 \6' /tmp/fstab.backup
   fi
 }
 
@@ -46,7 +47,8 @@ edit_fstab_home(){
   mounted="$(mount | grep -w ${partition})"
   # This check should suffice to change /etc/fstab only if partition is mounted, as root is needed to mount partitions anyway
   if [[ -n "${mounted}" ]] ; then
-    awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab
+    #awk -v partition="${partition}" -v changed="${changed}" '$2 == partition {$4=changed}' /etc/fstab
+    sed -r '/\/'${partition}'/!s/(.*) (\/'${partition}') (.*) (.*) (.*) (.*)/\1 \2 \3 '${changed}' \5 \6' /tmp/fstab.backup
   fi
 }
 
