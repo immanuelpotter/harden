@@ -8,11 +8,11 @@
 
 pam_configure(){
   grep_check "pam_pwquality.so" /etc/pam.d/password-auth 'password requisite pam_pwquality.so try_first_pass retry=3'
-  grep_check "^minlen" /etc/security/pwquality.conf 'minlen=14'
-  grep_check "^dcredit" /etc/security/pwquality.conf 'dcredit=-1'
-  grep_check "^lcredit" /etc/security/pwquality.conf 'lcredit=-1'
-  grep_check "^ocredit" /etc/security/pwquality.conf 'ocredit=-1'
-  grep_check "^ucredit" /etc/security/pwquality.conf 'ucredit=-1'
+  grep_check "^minlen" /etc/security/pwquality.conf 'minlen = 14'
+  grep_check "^dcredit" /etc/security/pwquality.conf 'dcredit = -1'
+  grep_check "^lcredit" /etc/security/pwquality.conf 'lcredit = -1'
+  grep_check "^ocredit" /etc/security/pwquality.conf 'ocredit = -1'
+  grep_check "^ucredit" /etc/security/pwquality.conf 'ucredit = -1'
 }
 
 pam_pw_lockouts(){
