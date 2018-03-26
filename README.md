@@ -7,7 +7,7 @@
 
 Directions for use:
 
-        0) Set up LVM with an encrypted LUKS partition.
+        0) Set up LVM with an encrypted LUKS partition, and make necessary changes in /etc/fstab
 	1) Set your variables in variables.env. This is the first file sourced and will be acted upon by other called functions.
 
 	2) Run main.sh as root to perform a full hardening run.
