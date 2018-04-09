@@ -31,7 +31,6 @@
 . stat_file_and_remediate.sh
 . disable_services.sh
 . grep_check.sh
-. modprobe_disable.sh
 . wireless_ifs_down.sh
 . pam_configuration.sh
 . login_defs.sh
@@ -204,19 +203,18 @@ grep_check_main(){
   grep_check "^AllowGroups" /etc/ssh/sshd_config 'AllowGroups wheel'
   grep_check "^DenyUsers" /etc/ssh/sshd_config 'DenyUsers all'
   grep_check "^Banner" /etc/ssh/sshd_config 'Banner /etc/issue.net'
-}
 
-modprobe_disable_main(){
-  for yet_more in $services_to_disable_modprobe ; do
-    modprobe_config $yet_more
-  done
+  # Disable ipv6 - removing singular modprobe function created just for this
+  grep_check "^options ipv6" /etc/modprobe.d/CIS.conf 'options ipv6 disable=1'
 }
 
 restart_services_main(){
   to_restart="postfix auditd sshd"
   for rst in $to_restart ; do
-    service $rst restart && echo "Restarted $rst service"
+    systemctl restart $rst && echo "Restarted $rst service"
   done
+  # start up AIDE
+  systemctl start aide
   # rsyslogd restarted with a HUP signal
   pkill -HUP rsyslogd
   echo "Sent HUP signal to rsyslogd"
