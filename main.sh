@@ -195,7 +195,7 @@ grep_check_main(){
   grep_check "^PermitRootLogin" /etc/ssh/sshd_config 'PermitRootLogin no'
   grep_check "^PermitEmptyPasswords" /etc/ssh/sshd_config 'PermitEmptyPasswords no'
   grep_check "^PermitUserEnvironment" /etc/ssh/sshd_config 'PermitUserEnvironment no'
-  grep_check "Ciphers" /etc/ssh/sshd_config 'Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
+  grep_check "^Ciphers" /etc/ssh/sshd_config 'Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
   grep_check "MACs" /etc/ssh/sshd_config 'MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
   grep_check "^ClientAliveInterval" /etc/ssh/sshd_config 'ClientAliveInterval 300'
   grep_check "^ClientAliveCountMax" /etc/ssh/sshd_config 'ClientAliveCountMax 0'
