@@ -65,7 +65,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     yum update -y && yum upgrade -y
-    yum install -y xorg-x11-fonts*
+    #yum install -y xorg-x11-fonts*
     cd /vagrant && ./main.sh && ./get_me_back_in.sh
   SHELL
 end
