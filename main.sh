@@ -149,11 +149,11 @@ stat_file_and_remediate_main(){
   stat_file_and_remediate /etc/shadow- 0600 root root
   stat_file_and_remediate /etc/group- 0600 root root
   stat_file_and_remediate /etc/gshadow- 0600 root root
+  stat_file_and_remediate /etc/cron.allow 0700 root root
 }
 
 no_crondeny_or_cronallow(){
   stat /etc/cron.deny && rm /etc/cron.deny || echo "cron.deny does not exist. Good!"
-  stat /etc/cron.allow && rm /etc/cron.allow || echo "cron.allow does not exist. Good!"
 }
 
 disable_services_main(){
