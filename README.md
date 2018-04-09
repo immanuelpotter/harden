@@ -7,8 +7,10 @@
 
 Directions for use:
 
+The best way to use these scripts is with a kickstart file which has set all the necessary logical volumes, grub pasword etc. already. If not, then:
+
         0) Set up LVM with an encrypted LUKS partition, and make necessary changes in /etc/fstab
-	1) Set your variables in variables.env. This is the first file sourced and will be acted upon by other called functions.
+	1) Set your variables in variables.env. This is the first file sourced and will be acted upon by other called functions. The defaults should suffice for most use cases.
 
 	2) Run main.sh as root to perform a full hardening run.
 
