@@ -47,7 +47,8 @@ yum_installations(){
                  net-tools \
                  tcp_wrappers \
                  iptables \
-                 rsyslog
+                 rsyslog \
+                 ansible
 }
 
 fs_types_main(){
@@ -293,6 +294,7 @@ further_uid_and_passwd_checks_main(){
   ensure_no_duplicate_names /etc/group
 }
 
+#TODO: fix /etc/fstab via ansible
 properties_check_main(){
   create_local_fs_dir
   make_systemd_tmp
