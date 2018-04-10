@@ -10,8 +10,11 @@ Directions for use:
 The best way to use these scripts is with a kickstart file which has set all the necessary logical volumes, grub password etc. already.
 
 set your variables in variables.env (defaults should be those specified in CIS doc)
+
 run: ./main.sh
+
 check the latest hardening_report.txt with
+
 ```less $(ls -t | grep hardening | head -n1)```
 
 TODO:
