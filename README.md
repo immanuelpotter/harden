@@ -7,7 +7,20 @@
 
 Directions for use:
 
-The best way to use these scripts is with a kickstart file which has set all the necessary logical volumes, grub pasword etc. already. If not, then:
+The best way to use these scripts is with a kickstart file which has set all the necessary logical volumes, grub password etc. already.
+
+TODO:
+
+Ansible mount role for /etc/fstab, apply security patches for newest version of OpenSSH
+
+
+
+
+
+
+
+
+Without kickstart:
 
         0) Set up LVM with an encrypted LUKS partition, and make necessary changes in /etc/fstab
 	1) Set your variables in variables.env. This is the first file sourced and will be acted upon by other called functions. The defaults should suffice for most use cases.
