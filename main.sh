@@ -9,6 +9,8 @@
 # This is the main wrapper script that runs everything else in sequence.
 #
 # Notes:    Post-hardening report can be found in same dir as this script, called hardening-report.txt
+#
+#TODO: fix /etc/fstab via ansible
 
 . variables.env
 
@@ -308,6 +310,10 @@ properties_check_main(){
   remount_tmps "/dev/shm"
 }
 
+verify_system(){
+  rpm -Va
+}
+
 main(){
   date > hardening_report.${BACKUP}.txt
   yum_installations
@@ -343,6 +349,7 @@ main(){
   deny_hosts
   yum_removals
   restart_services_main
+  verify_system
   echo "Scripts finished."
   echo "Please check hardening_report.txt" 
 }
