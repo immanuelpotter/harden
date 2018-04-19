@@ -7,6 +7,8 @@
 
 Directions for use:
 
+	vagrant box add centos/7
+
 The best way to use these scripts is with a kickstart file which has set all the necessary logical volumes, grub password etc. already.
 
 set your variables in variables.env (defaults should be those specified in CIS doc)
