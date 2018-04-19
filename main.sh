@@ -50,7 +50,8 @@ yum_installations(){
                  tcp_wrappers \
                  iptables \
                  rsyslog \
-                 ansible
+                 ansible \
+                 yum-utils
 }
 
 fs_types_main(){
