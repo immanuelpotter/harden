@@ -1,6 +1,8 @@
 #!/bin/bash
-
+#
 #Ensures that each partition listed below is mounted separately. See the report for details
+#
+#TODO: fix rest of partition logic checking, this is just for home (and doesn't even work)
 
 home="/home"
 

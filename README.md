@@ -21,9 +21,9 @@ check the latest hardening_report.txt with
 
 TODO:
 
-Ansible mount role for /etc/fstab, apply security patches for newest version of OpenSSH
+- Ansible mount role for /etc/fstab, apply security patches for newest version of OpenSSH
 
-
+- partition_checks is only checking for home - need better checking logic around this for different filesystems and mountpoints. 
 
 
 
