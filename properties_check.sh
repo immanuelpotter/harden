@@ -11,6 +11,8 @@
 
 #Dependency on grep_check.sh
 
+#TODO: fix edit_fstab_tmp, + edit_fstab_home
+
 create_local_fs_dir(){
   if [[ ! -d /etc/systemd/system/local-fs.target.wants ]] ; then
     mkdir /etc/systemd/system/local-fs.target.wants
