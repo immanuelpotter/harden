@@ -1,0 +1,60 @@
+---
+- name: "/etc/fstab management"
+  become: true
+  become_user: root
+  connection: local
+  hosts: local
+  tasks:
+    - name: "sort out /root"
+      mount:
+        path: "/"
+        src: "/dev/mapper/centos-root"
+        fstype: "xfs"
+        state: "present"
+    - name: "sort out /var"
+      mount:
+        path: "/var"
+        src: "/dev/mapper/centos-var"
+        fstype: "xfs"
+        state: "present"
+    - name: "sort out /var/tmp"
+      mount:
+        path: "/var/tmp"
+        src: "/dev/mapper/centos-var_tmp"
+        fstype: "xfs"
+        opts: "defaults,nosuid,nodev,noexec"
+        state: "present"
+    - name: "sort out home"
+      mount:
+        path: "/home"
+        src: "/dev/mapper/centos-home"
+        fstype: "xfs"
+        opts: "defaults,nodev"
+        state: "present"
+    - name: "sort out /var/log"
+      mount:
+        path: "/var/log"
+        src: "/dev/mapper/centos-var_log"
+        fstype: "xfs"
+        state: "present"
+        boot: "no"
+    - name: "sort out /var/log/audit"
+      mount:
+        path: "/var/log/audit"
+        src: "/dev/mapper/centos-var_log_audit"
+        fstype: "xfs"
+        state: "present"
+#    - name: "sort out /dev/shm"
+#      mount:
+#        path: "/dev/shm"
+#        src: "devtmpfs"
+#        fstype: "tmpfs"
+#        opts: "nosuid,nodev,noexec"
+#        state: "present"
+    - name: "sort out /tmp"
+      mount:
+        path: "/tmp"
+        src: "/dev/mapper/centos-tmp"
+        fstype: "xfs"
+        opts: "defaults,nosuid,nodev,noexec"
+        state: "present"

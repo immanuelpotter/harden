@@ -19,13 +19,23 @@ check the latest hardening_report.txt with
 
 ```less $(ls -t | grep hardening | head -n1)```
 
+--------------NOTE--------------
+
+	/etc/fstab is managed by an ansible play in the ansible/ directory.
+
+	This is not ran by the main.sh, in case you have not got the logical volumes set up in the same way - which has caused problems during development.
+
+	If you use this file with a kickstart file in my other repo, you can add this to main.sh:
+
+		ansible-playbook -i ansible/hosts ansible/fstab.yml
+
+	And have a fully automated hardening run.
+
+If not, manage /etc/fstab yourself.
+
 TODO:
 
-- Ansible mount role for /etc/fstab, apply security patches for newest version of OpenSSH
-
 - partition_checks is only checking for home - need better checking logic around this for different filesystems and mountpoints. 
-
-
 
 
 
