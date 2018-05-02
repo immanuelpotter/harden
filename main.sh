@@ -10,8 +10,6 @@
 #
 # Notes:    Post-hardening report can be found in same dir as this script, called hardening-report.txt
 #
-#TODO: fix /etc/fstab via ansible
-
 . variables.env
 
 . issue.sh
@@ -297,14 +295,14 @@ further_uid_and_passwd_checks_main(){
   ensure_no_duplicate_names /etc/group
 }
 
-#TODO: fix /etc/fstab via ansible
+#/etc/fstab now managed via ansible
 properties_check_main(){
   create_local_fs_dir
   make_systemd_tmp
-  edit_fstab_tmp "/tmp"
-  edit_fstab_tmp "/var/tmp"
-  edit_fstab_tmp "/dev/shm"
-  edit_fstab_home "/home"
+#  edit_fstab_tmp "/tmp"
+#  edit_fstab_tmp "/var/tmp"
+#  edit_fstab_tmp "/dev/shm"
+#  edit_fstab_home "/home"
   remount_home "/home"
   remount_tmps "/tmp"
   remount_tmps "/var/tmp"
