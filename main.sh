@@ -10,7 +10,6 @@
 #
 # Notes:    Post-hardening report can be found in same dir as this script, called hardening-report.txt
 #
-set -euo pipefail
 
 . variables.env
 
@@ -23,7 +22,6 @@ set -euo pipefail
 . ensure_gpg_configured.sh
 . yum_gpg_check.sh
 . aide_install.sh
-. crontab_aide.sh
 . grub_passwd.sh
 . single_user_auth.sh
 . restrict_kernel_parameters.sh
@@ -321,6 +319,7 @@ main(){
   superusr_check
   superpass_check
   aide_initialise
+  aide_crontab
   single_user_auth_main
   restrict_kernel_parameters_main
   NX_is_active
