@@ -10,6 +10,8 @@
 #
 # Notes:    Post-hardening report can be found in same dir as this script, called hardening-report.txt
 #
+set -euo pipefail
+
 . variables.env
 
 . issue.sh
@@ -41,15 +43,9 @@
 . further_uid_and_passwd_checks.sh
 
 yum_installations(){
-  yum check-update && yum update -y
-  yum install -y ntp \
-                 chrony \
-                 net-tools \
-                 tcp_wrappers \
-                 iptables \
-                 rsyslog \
-                 ansible \
-                 yum-utils
+  yum update -y
+  echo "$yum_installs"
+  yum install -y $yum_installs
 }
 
 fs_types_main(){
@@ -92,7 +88,6 @@ single_user_auth_main(){
 }
 
 yum_removals(){
-  yum_removals="xorg-x11* rpbind rsh talk telnet openldap-clients"
   for yumrmv in $yum_removals ; do
     yum remove $yumrmv -y
   done
@@ -325,6 +320,7 @@ main(){
   yum_gpg_check_main
   superusr_check
   superpass_check
+  aide_initialise
   single_user_auth_main
   restrict_kernel_parameters_main
   NX_is_active
