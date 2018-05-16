@@ -1,9 +1,11 @@
  
  CIS Benchmark Standard CentOS 7 (v2.1.1)
 
+ I am not affiliated with the CIS in any way - these scripts are designed to provide a solid base to build from - use at your own risk
+
  Server Level 1 Hardening scripts
 
- This has been designed to be idempotent; i.e. running more than once at any time will not cause problems.
+ This has been designed to be idempotent; i.e. running more than once at any time should not cause problems.
 
 Directions for use:
 
@@ -21,23 +23,16 @@ check the latest hardening_report.txt with
 
 --------------NOTE--------------
 
-	/etc/fstab is managed by an ansible play in the ansible/ directory.
+/etc/fstab is managed by an ansible play in the ansible/ directory.
+This is not ran by the main.sh, in case you have not got the logical volumes set up in the same way - which has caused problems during development.
 
-	This is not ran by the main.sh, in case you have not got the logical volumes set up in the same way - which has caused problems during development.
+If you use this file with a kickstart file in my other repo, you can add this to main.sh:
 
-	If you use this file with a kickstart file in my other repo, you can add this to main.sh:
+	ansible-playbook -i ansible/hosts ansible/fstab.yml
 
-		ansible-playbook -i ansible/hosts ansible/fstab.yml
-
-	And have a fully automated hardening run.
+And have a fully automated hardening run.
 
 If not, manage /etc/fstab yourself.
-
-TODO:
-
-- partition_checks is only checking for home - need better checking logic around this for different filesystems and mountpoints. 
-
-
 
 
 Without kickstart:
