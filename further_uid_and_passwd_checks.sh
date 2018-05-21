@@ -1,7 +1,5 @@
 #!/bin/bash
 
-UID_THRESHOLD=1000
-
 root_uid_check(){
   uid_zero="$(cat /etc/passwd | awk -F: '($3 == 0) { print $1 }')"
   if [[ $uid_zero != 'root' ]] ; then
