@@ -167,13 +167,7 @@ grep_check_main(){
   #postfix
   grep_check "^inet_interfaces" /etc/postfix/main.cf 'inet_interfaces = localhost'
   #rsyslog
-
-  #Three files below grep check doesn't work for - commented out to investigate.
-  #Bottom two can stay commented anyway as not trying to create a log host.
-
-  #grep_check "^\$FileCreateMode" /etc/rsyslog.conf '$FileCreateMode 0640'
-  sed -i '/^$FileCreateMode/d' /etc/rsyslog.conf
-  echo -e "\$FileCreateMode 0640" >> /etc/rsyslog.conf
+  grep_check "^\$FileCreateMode" /etc/rsyslog.conf '\$FileCreateMode 0640'
 
   # Leave the lines below commented if you DON'T want the box to be a designated log host.
 
