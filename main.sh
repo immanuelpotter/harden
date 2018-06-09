@@ -161,7 +161,7 @@ grep_check_main(){
   grep_check "^restrict\s+-4" /etc/ntp.conf 'restrict -4 default kod nomodify notrap nopeer noquery'
   grep_check "^restrict\s+-6" /etc/ntp.conf 'restrict -6 default kod nomodify notrap nopeer noquery'
   grep_check "^OPTIONS=" /etc/sysconfig/ntpd 'OPTIONS=\"-u ntp:ntp\"'
-  grep_check "^ExecStart=/usr/sbin/ntpd" /usr/lib/systemd/system/ntpd.service 'ExecStart=/usr/sbin/ntpd/ -u ntp:ntp $OPTIONS'
+  grep_check "^ExecStart=" /usr/lib/systemd/system/ntpd.service 'ExecStart=/usr/sbin/ntpd -u ntp:ntp $OPTIONS'
   #chrony
   grep_check "^OPTIONS" /etc/sysconfig/chronyd 'OPTIONS=\"-u chrony\"'
   #postfix
