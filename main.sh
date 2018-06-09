@@ -160,26 +160,26 @@ grep_check_main(){
   #ntp
   grep_check "^restrict\s+-4" /etc/ntp.conf 'restrict -4 default kod nomodify notrap nopeer noquery'
   grep_check "^restrict\s+-6" /etc/ntp.conf 'restrict -6 default kod nomodify notrap nopeer noquery'
-  grep_check "^OPTIONS=" /etc/sysconfig/ntpd 'OPTIONS="-u ntp:ntp"'
+  grep_check "^OPTIONS=" /etc/sysconfig/ntpd 'OPTIONS=\"-u ntp:ntp\"'
   grep_check "^ExecStart=/usr/sbin/ntpd" /usr/lib/systemd/system/ntpd.service 'ExecStart=/usr/sbin/ntpd/ -u ntp:ntp $OPTIONS'
   #chrony
-  grep_check "^OPTIONS" /etc/sysconfig/chronyd 'OPTIONS="-u chrony"'
+  grep_check "^OPTIONS" /etc/sysconfig/chronyd 'OPTIONS=\"-u chrony\"'
   #postfix
   grep_check "^inet_interfaces" /etc/postfix/main.cf 'inet_interfaces = localhost'
   #rsyslog
-  
+
   #Three files below grep check doesn't work for - commented out to investigate.
   #Bottom two can stay commented anyway as not trying to create a log host.
 
   #grep_check "^\$FileCreateMode" /etc/rsyslog.conf '$FileCreateMode 0640'
   sed -i '/^$FileCreateMode/d' /etc/rsyslog.conf
   echo -e "\$FileCreateMode 0640" >> /etc/rsyslog.conf
-  
+
   # Leave the lines below commented if you DON'T want the box to be a designated log host.
 
   # grep_check '#$ModLoad imtcp.so' /etc/rsyslog.conf '#$ModLoad imtcp.so'
   # grep_check '#$InputTCPServerRun' /etc/rsyslog.conf '#$InputTCPServerRun 514'
-  
+
   #sshd
   grep_check "^Protocol" /etc/ssh/sshd_config 'Protocol 2'
   grep_check "^LogLevel" /etc/ssh/sshd_config 'LogLevel INFO'
@@ -333,7 +333,7 @@ main(){
   pam_main
   properties_check_main
   nologin_sysaccounts
-  usermod_changes     
+  usermod_changes
   finds_main
   ./firewall_config.sh && echo "IPtables flushed and updated"
   securetty_changes
@@ -345,7 +345,7 @@ main(){
   restart_services_main
   verify_system
   echo "Scripts finished."
-  echo "Please check hardening_report.txt" 
+  echo "Please check hardening_report.txt"
 }
 
 main 2>&1 | tee -a hardening_report.${BACKUP}.txt
