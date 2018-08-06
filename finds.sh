@@ -36,6 +36,6 @@ audit_sgid_executables(){
   echo -e "Performing checks on sgid executables..."
   local BAD="$(df --local -P | awk '(NR!=1) {print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -2000)"
   if [[ ${#BAD} -gt 0 ]] ; then
-    echo -e "The follwing files:\n ${BAD} \nhave SGID set. Check this is supposed to be the case, and if not, remove - as users may be able to change their GID and may have more access than intended."
+    echo -e "The following files:\n ${BAD} \nhave SGID set. Check this is supposed to be the case, and if not, remove - as users may be able to change their GID and may have more access than intended."
   fi
 }
