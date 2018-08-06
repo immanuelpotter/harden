@@ -39,6 +39,7 @@
 . etc_shadow_lock.sh
 . legacy_plus_entries.sh
 . further_uid_and_passwd_checks.sh
+. add-gui.sh
 
 yum_installations(){
   yum update -y
@@ -338,8 +339,10 @@ main(){
   yum_removals
   restart_services_main
   verify_system
+  add-gui
   echo "Scripts finished."
   echo "Please check hardening_report.txt"
 }
 
 main 2>&1 | tee -a hardening_report.${BACKUP}.txt
+reboot
