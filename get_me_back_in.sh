@@ -3,10 +3,7 @@
 # Quick utility to run post-hardening so the vagrant user can get back in the box via ssh
 
 USERS_TO_ALLOW_IN="vagrant"
-
-allow_hosts_back_in(){
-  sed -i '/^ALL/d' /etc/hosts.deny
-}
+LOCAL_NETWORK:="10.0.2"
 
 add_users_to_wheel(){
 for i in $USERS_TO_ALLOW_IN ; do
@@ -15,9 +12,7 @@ done
 }
 
 main(){
-  allow_hosts_back_in
   add_users_to_wheel
-  echo "ALL EXCEPT sshd : 10.0.2"
 }
 
 main
