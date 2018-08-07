@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "centos/7"
-
+  config.vm.box = "geerlingguy/centos7"
+  # config.vm.ssh = "22"
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
 
@@ -64,6 +64,6 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     yum update -y && yum upgrade -y
-    cd /vagrant && ./main.sh && ./get_me_back_in.sh
+    cd /vagrant && ./disable-se-linux-dev.sh && ./main.sh && ./get_me_back_in.sh
   SHELL
 end

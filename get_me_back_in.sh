@@ -14,5 +14,10 @@ for i in $USERS_TO_ALLOW_IN ; do
 done
 }
 
-allow_hosts_back_in
-add_users_to_wheel
+main(){
+  allow_hosts_back_in
+  add_users_to_wheel
+  echo "ALL EXCEPT sshd : 10.0.2"
+}
+
+main
