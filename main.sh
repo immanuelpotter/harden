@@ -227,8 +227,11 @@ pam_main(){
 }
 
 deny_hosts(){
-  echo "ALL: ALL" >> /etc/hosts.deny
-  echo "All hosts denied SSH access"
+    # CentOS boxes usually come up with enp0s3 as the default interface for Virtualbox.
+  LOCAL_NETWORK=$(ifconfig | grep enp0s3 -A5 | awk -v inet="inet" '$1 == inet {print $2}')
+  FIRST_THREE_OCTETS=$(echo $LOCAL_NETWORK | cut -d '.' -f1-3)
+  echo "ALL EXCEPT sshd : $FIRST_THREE_OCTETS." > /etc/hosts.deny
+  echo "All hosts (except local network) denied SSH access"
 }
 
 log_file_permissions_set(){
