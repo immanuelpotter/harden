@@ -343,6 +343,7 @@ main(){
   restart_services_main
   verify_system
   add-gui
+  . ./get_me_back_in.sh
   echo "Scripts finished."
   echo "Please check hardening_report.txt"
 }
