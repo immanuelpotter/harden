@@ -6,7 +6,7 @@
 find_user(){
   POTENTIAL_USERS="ec2-user vagrant"
   for i in ${POTENTIAL_USERS} ; do 
-    if [[ cat /etc/passwd | grep ${i} ]] ; then
+    if [[ ! -z $(cat /etc/passwd | grep ${i}) ]] ; then
       global USERS_TO_ALLOW_IN=${i}
     fi
   done
