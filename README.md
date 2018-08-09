@@ -62,10 +62,6 @@ CHANGES YOU MAY WISH TO MAKE:
 
 This has been scripted as "get_me_back_in.sh" - as a quick executable to run post-harden which adds the vagrant user to "wheel" (as wheel is in the allowed groups in /etc/ssh/sshd_config). It also removes ALL: ALL from /etc/hosts.deny to allow our host back in - this could be done by explicitly allowing hosts which allows greater security.
 
-remove:
-``` ALL: ALL ```
- lines from /etc/hosts.deny OR add hosts to /etc/hosts.allow
-
 Add users you want to be able to SSH in to a group, and put this group in /etc/ssh/sshd_config. Otherwise, post-harden, you won't be able to get back in the box.
 
 ``` 
